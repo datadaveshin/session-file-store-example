@@ -4,7 +4,9 @@
   "description": "working examples",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "session-file-store": "^1.1.2"
   },
   "devDependencies": {},
   "scripts": {
