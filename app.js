@@ -7,13 +7,16 @@ app.use(session({
     store: new FileStore,
     secret: 'keyboard cat',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    path: "./tmp"
   })
 );
 
 app.get('/', function (req, res) {
   if (req.session.views) {
     req.session.views++;
+    console.log('\n\nreq.session.path\n', req.session.path)
+    console.log('\n\nreq.session.secret\n', req.session.secret)
     res.setHeader('Content-Type', 'text/html');
     res.write('<p>views: ' + req.session.views + '</p>');
     res.end();
