@@ -4,25 +4,31 @@ var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 
 app.use(session({
-    store: new FileStore,
+    store: new FileStore({
+        reapInterval: 15,
+        ttl: 15,
+    }),
     secret: 'keyboard cat',
     resave: true,
     saveUninitialized: true,
-    path: "./tmp"
   })
 );
+
+// app.use(session());
 
 app.get('/', function (req, res) {
   if (req.session.views) {
     req.session.views++;
-    console.log('\n\nreq.session.path\n', req.session.path)
-    console.log('\n\nreq.session.secret\n', req.session.secret)
+    console.log('\n\nreq.session\n', req.session)
+    console.log('\n\nreq.session.random\n', req.session.random)
     res.setHeader('Content-Type', 'text/html');
     res.write('<p>views: ' + req.session.views + '</p>');
     res.end();
   } else {
     req.session.views = 1;
-    res.end('Welcome to the file session demo. Refresh page!');
+    req.session.random = Math.random().toFixed(3);
+    res.redirect('/')
+    // res.end('Welcome to the file session demo. Refresh page!');
   }
 });
 
