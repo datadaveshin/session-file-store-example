@@ -27,8 +27,9 @@ app.get('/', function (req, res) {
   } else {
     req.session.views = 1;
     req.session.random = Math.random().toFixed(3);
-    res.redirect('/')
-    // res.end('Welcome to the file session demo. Refresh page!');
+    // THE REDIRECT BELOW WAS AN EXPERIMENT
+    // res.redirect('/')
+    res.end('Welcome to the file session demo. Refresh page!');
   }
 });
 
